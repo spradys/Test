@@ -1,0 +1,36 @@
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <script>
+      // Функція
+      function calculate(num1, num2, operator) {
+        switch (operator) {
+          case "+":
+            return num1 + num2;
+          case "-":
+            return num1 - num2;
+          case "*":
+            return num1 * num2;
+          case "%":
+            return num1 % num2;
+        }
+      }
+
+      //  відображення функції
+      function startCalculator() {
+        const num1 = parseFloat(prompt("Enter the first number"));
+        const operator = prompt("Enter the operatorр (+, -, *, /, %):");
+        const num2 = parseFloat(prompt("Введіть друге число:"));
+
+        const result = calculate(num1, num2, operator);
+        alert(`result: ${result}`);
+      }
+
+      // Запуск калькулятора
+      window.onload = startCalculator;
+    </script>
+  </head>
+  <body></body>
+</html>
