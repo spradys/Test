@@ -20,29 +20,37 @@ function calculate(num1, operator, num2) {
   }
 }
 
-// запуск калькулятора
+/// запуск калькулятора
 function startCalculator() {
-  rl.question('Введіть перше число: ', (input1) => {
-    const num1 = parseFloat(input1); // Перетворення на число
+  let continueCalculation = true; // Цикл
 
-    rl.question('Виберіть операцію (+, -, *, /, %): ', (operator) => {
-      rl.question('Введіть друге число: ', (input2) => {
-        const num2 = parseFloat(input2);
+  const askQuestions = () => {
+    rl.question('Введіть перше число: ', (input1) => {
+      const num1 = parseFloat(input1); 
 
-        const result = calculate(num1, operator, num2);
-        console.log(`Результат: ${result}`);
+      rl.question('Виберіть операцію (+, -, *, %): ', (operator) => {
+        rl.question('Введіть друге число: ', (input2) => {
+          const num2 = parseFloat(input2);
 
-        rl.question('Бажаєте виконати ще одну операцію? (так/ні): ', (answer) => {
-          if (answer.toLowerCase() === 'так') {
-            startCalculator();
-          } else {
-            console.log('Дякуємо за використання калькулятора!');
-            rl.close(); // Закриваємо інтерфейс
-          }
+          const result = calculate(num1, operator, num2);
+          console.log(`Результат: ${result}`);
+
+          rl.question('Бажаєте виконати ще одну операцію? (так/ні): ', (answer) => {
+            if (answer.toLowerCase() !== 'так') {
+              continueCalculation = false; "
+              console.log('Закритто!');
+              rl.close(); 
+            } else {
+              askQuestions(); 
+            }
+          });
         });
       });
     });
-  });
+  };
+
+  
+  askQuestions();
 }
 
 // Запуск калькулятора
