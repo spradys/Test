@@ -1,57 +1,55 @@
 const readline = require('readline');
 
-// інтерфейс
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-// Функція
-function calculate(num1, operator, num2) {
-  switch (operator) {
-    case '+':
-      return num1 + num2;
-    case '-':
-      return num1 - num2;
-    case '*':
-      return num1 * num2;
-    case '%':
-      return num1 % num2;
-  }
-}
-
-/// запуск калькулятора
 function startCalculator() {
-  let continueCalculation = true; // Цикл
+  let continueCalculation = true; 
 
-  const askQuestions = () => {
-    rl.question('Введіть перше число: ', (input1) => {
-      const num1 = parseFloat(input1); 
+  // цикл 
+  do {
+    // Перше число
+    rl.question('Введіть перше число: ', (firstNumber) => {
+      // Друге число
+      rl.question('Введіть друге число: ', (secondNumber) => {
+        // Операція
+        rl.question('Виберіть операцію (+, -, *, /): ', (operation) => {
+          const num1 = parseFloat(firstNumber);
+          const num2 = parseFloat(secondNumber);
+          let result;
 
-      rl.question('Виберіть операцію (+, -, *, %): ', (operator) => {
-        rl.question('Введіть друге число: ', (input2) => {
-          const num2 = parseFloat(input2);
+          // Операція
+          switch (operation) {
+            case '+':
+              result = num1 + num2;
+              break;
+            case '-':
+              result = num1 - num2;
+              break;
+            case '*':
+              result = num1 * num2;
+              break;
+            case '/':
+              result = num1 / num2;
+              break;
+          }
 
-          const result = calculate(num1, operator, num2);
           console.log(`Результат: ${result}`);
 
+          // Запитуємо, чи хоче користувач продовжити
           rl.question('Бажаєте виконати ще одну операцію? (так/ні): ', (answer) => {
             if (answer.toLowerCase() !== 'так') {
-              continueCalculation = false; "
-              console.log('Закритто!');
-              rl.close(); 
-            } else {
-              askQuestions(); 
+              continueCalculation = false; // Завершуємо цикл, якщо відповідь "ні"
+              console.log('Дякуємо за використання калькулятора!');
+              rl.close(); // Закриваємо інтерфейс
             }
           });
         });
       });
     });
-  };
-
-  
-  askQuestions();
+  } while (continueCalculation); 
 }
 
-// Запуск калькулятора
 startCalculator();
