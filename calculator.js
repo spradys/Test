@@ -1,55 +1,36 @@
 const rl = require('readline-sync');
+let continueCalculation = true;
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+while (continueCalculation) {
+    const firstNumber = rl.question('Enter the first number? ');
+    const secondNumber = rl.question('Enter the second number? ');
+    const operation = rl.question('Enter the operation? ');
 
-function startCalculator() {
-  let continueCalculation = true; 
+    const num1 = parseFloat(firstNumber);
+    const num2 = parseFloat(secondNumber);
+    let result;
 
-  // цикл 
-  do {
-    // Перше число
-    rl.question('Введіть перше число: ', (firstNumber) => {
-      // Друге число
-      rl.question('Введіть друге число: ', (secondNumber) => {
-        // Операція
-        rl.question('Виберіть операцію (+, -, *, /): ', (operation) => {
-          const num1 = parseFloat(firstNumber);
-          const num2 = parseFloat(secondNumber);
-          let result;
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            result = num1 / num2;
+            break;
+        default:
+    }
 
-          // Операція
-          switch (operation) {
-            case '+':
-              result = num1 + num2;
-              break;
-            case '-':
-              result = num1 - num2;
-              break;
-            case '*':
-              result = num1 * num2;
-              break;
-            case '/':
-              result = num1 / num2;
-              break;
-          }
+    console.log(`Result: ${result}`);
 
-          console.log(`Результат: ${result}`);
-
-          // Запитуємо, чи хоче користувач продовжити
-          rl.question('Бажаєте виконати ще одну операцію? (так/ні): ', (answer) => {
-            if (answer.toLowerCase() !== 'так') {
-              continueCalculation = false; // Завершуємо цикл, якщо відповідь "ні"
-              console.log('Дякуємо за використання калькулятора!');
-              rl.close(); // Закриваємо інтерфейс
-            }
-          });
-        });
-      });
-    });
-  } while (continueCalculation); 
+    const answer = rl.question('Do you want to perform another operation? (yes/no): ').trim().toLowerCase();
+    if (answer !== 'yes' ) {
+        continueCalculation = false;
+        console.log('Thank you for using the calculator!');
+    }
 }
-
-startCalculator();
