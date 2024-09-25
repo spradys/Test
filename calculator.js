@@ -28,7 +28,7 @@ while (continueCalculation) {
 
     console.log(`Result: ${result}`);
 
-    const answer = rl.question('Do you want to perform another operation? (yes/no): ').trim().toLowerCase();
+    const answer = rl.question('Do you want to perform another operation? (yes/no): ').toLowerCase();
     if (answer !== 'yes' ) {
         continueCalculation = false;
         console.log('Thank you for using the calculator!');
