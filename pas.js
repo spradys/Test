@@ -22,4 +22,5 @@ function main() {
     const characters = getPasswordCharacters(choice);
     console.log(`Your passwor: ${generatePassword(length, characters)}`);
 }
+
 main();
