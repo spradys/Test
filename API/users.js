@@ -1,7 +1,7 @@
 
 const express = require('express');
 const { Pool } = require('pg');
-
+const router = express.Router();
 
 
 const app = express();
@@ -17,6 +17,7 @@ const pool = new Pool({
   database:  'nwe',
 });
 pool.connect()
+
 
 app.get('/users', async (req, res) => {
   try {
@@ -100,7 +101,12 @@ app.put('/users/:id', async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 });
+router.get('/users', async (req, res) => {
+  const result = await pool.query('SELECT * FROM users');
+  res.json(result.rows);
+});
 
+module.exports = router;
 
 
 app.listen(PORT, () => {
